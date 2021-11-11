@@ -31,7 +31,7 @@
     display: inline-block;
     width: 30%;
 }
-.buttonChange{
+.buttonChange, .addCard{
     display: block;
     position: relative;
     left: 50%;
@@ -59,7 +59,7 @@
     color: #fff;
     cursor: pointer;
   }
-.debetCard, .creditCard{
+.Debet, .Credit{
     margin: 10px;
     padding: 10px;
     background-color: #e7e7e7;
