@@ -321,18 +321,18 @@ function changeCard() {
                     for(let j = 0; j < itemСheck.children.length; j++) {
                         if(itemСheck.children[j].type === 'radio'){
                             let nameClass = itemСheck.children[j].className;
-                                bank.clients[indexActiveCard].checks[i][nameClass] = itemСheck.children[j].checked;
-                                document.getElementsByClassName(itemСheck.children[j].getAttribute('data-id'))[indexActiveCard].innerText = 
-                                itemСheck.children[j].checked;
-                                itemСheck.children[j].checked = false;
+                            bank.clients[indexActiveCard].checks[i][nameClass] = itemСheck.children[j].checked;
+                            document.getElementsByClassName(itemСheck.children[j].getAttribute('data-id'))[indexActiveCard].innerText = 
+                            itemСheck.children[j].checked;
+                            itemСheck.children[j].checked = false;
                         } else {
                             if(itemСheck.children[j].value) {
                                 if(itemСheck.children[j].valueAsNumber) {
                                     let nameClass = itemСheck.children[j].className;
-                                        bank.clients[indexActiveCard].checks[i][nameClass] = itemСheck.children[j].valueAsNumber;
-                                        document.getElementsByClassName(itemСheck.children[j].getAttribute('data-id'))[indexActiveCard].innerText = 
-                                        itemСheck.children[j].valueAsNumber;
-                                        itemСheck.children[j].valueAsNumber = undefined;
+                                    bank.clients[indexActiveCard].checks[i][nameClass] = itemСheck.children[j].valueAsNumber;
+                                    document.getElementsByClassName(itemСheck.children[j].getAttribute('data-id'))[indexActiveCard].innerText = 
+                                    itemСheck.children[j].valueAsNumber;
+                                    itemСheck.children[j].valueAsNumber = undefined;
                                 } else {
                                     let nameClass = itemСheck.children[j].className;
                                     bank.clients[indexActiveCard].checks[i][nameClass] = itemСheck.children[j].value;
