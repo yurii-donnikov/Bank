@@ -268,29 +268,29 @@ function changeCard() {
                     updateCheck(childrenPopup[i]);
                 }
             } else {
-                    if(childrenPopup[i].type === 'radio'){
+                if(childrenPopup[i].type === 'radio'){
+                    let name = childrenPopup[i].className;
+                    if(isFlag){
+                        newClient[name] = childrenPopup[i].checked;
+                    } 
+                    else {
+                        bank.clients[indexActiveCard][name] = childrenPopup[i].checked;
+                        document.getElementsByClassName(childrenPopup[i].getAttribute('data-id'))[indexActiveCard].innerText = childrenPopup[i].checked;
+                    }
+                    childrenPopup[i].checked = false;
+                } else {
+                    if(childrenPopup[i].value) {
                         let name = childrenPopup[i].className;
                         if(isFlag){
-                            newClient[name] = childrenPopup[i].checked;
-                        } 
-                        else {
-                            bank.clients[indexActiveCard][name] = childrenPopup[i].checked;
-                            document.getElementsByClassName(childrenPopup[i].getAttribute('data-id'))[indexActiveCard].innerText = childrenPopup[i].checked;
+                            newClient[name] = childrenPopup[i].value;
+                            newClient['registration'] = new Date();
+                        } else{
+                            bank.clients[indexActiveCard][name] = childrenPopup[i].value;
+                            document.getElementsByClassName(childrenPopup[i].getAttribute('data-id'))[indexActiveCard].innerText = childrenPopup[i].value;
                         }
-                        childrenPopup[i].checked = false;
-                    } else {
-                        if(childrenPopup[i].value) {
-                            let name = childrenPopup[i].className;
-                            if(isFlag){
-                                newClient[name] = childrenPopup[i].value;
-                                newClient['registration'] = new Date();
-                            } else{
-                                bank.clients[indexActiveCard][name] = childrenPopup[i].value;
-                                document.getElementsByClassName(childrenPopup[i].getAttribute('data-id'))[indexActiveCard].innerText = childrenPopup[i].value;
-                            }
-                            childrenPopup[i].value = '';
-                        }
+                        childrenPopup[i].value = '';
                     }
+                }
             }
         }
     
