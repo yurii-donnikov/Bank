@@ -235,7 +235,6 @@ class Bank {
               buttonDelete.innerText = 'Delete';
               buttonDelete.className = 'buttonDelete';
               buttonDelete.setAttribute('data-update', bank.clients[i]['id']);
-
               clientCard.addEventListener('click', (event) => {
                 if(event.target.getAttribute('data-update')) {
                     if(event.target.className === 'buttonChange'){
