@@ -230,18 +230,19 @@ class Bank {
               buttonChange = clientCard.appendChild(document.createElement('div'));
               buttonChange.innerText = 'Change';
               buttonChange.className = 'buttonChange';
-              buttonChange.setAttribute('data-change', bank.clients[i]['id']);
+              buttonChange.setAttribute('data-update', bank.clients[i]['id']);
               buttonDelete = clientCard.appendChild(document.createElement('div'));
               buttonDelete.innerText = 'Delete';
               buttonDelete.className = 'buttonDelete';
-              buttonDelete.setAttribute('data-delete', bank.clients[i]['id']);
+              buttonDelete.setAttribute('data-update', bank.clients[i]['id']);
 
               clientCard.addEventListener('click', (event) => {
-                if(event.target.getAttribute('data-change')) {
-                    changeUser(event.target);
-                }
-                if(event.target.getAttribute('data-delete')) {
-                   deleteUser(event.target);
+                if(event.target.getAttribute('data-update')) {
+                    if(event.target.className === 'buttonChange'){
+                        changeUser(event.target);
+                    } else {
+                        deleteUser(event.target);
+                    }
                 }
               })
           }
@@ -251,7 +252,7 @@ createCard()
 
 function changeUser (item){
     for(let i = 0; i < bank.clients.length; i++){
-        if(bank.clients[i]['id'] === Number(item.getAttribute('data-change'))){
+        if(bank.clients[i]['id'] === Number(item.getAttribute('data-update'))){
             indexActiveCard = bank.clients.indexOf(bank.clients[i]);
             document.querySelector('.popupWindow').style = 'display: block';
         }
@@ -260,7 +261,7 @@ function changeUser (item){
 
 function deleteUser (item){
     for(let i = 0; i < bank.clients.length; i++){
-        if(bank.clients[i]['id'] === Number(item.getAttribute('data-delete'))){
+        if(bank.clients[i]['id'] === Number(item.getAttribute('data-update'))){
         let indexElement = bank.clients.indexOf(bank.clients[i]);
         item.parentNode.remove();
         bank.clients.splice(indexElement, 1);
