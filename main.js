@@ -231,17 +231,17 @@ class Bank {
               buttonChange.innerText = 'Change';
               buttonChange.className = 'buttonChange';
               buttonChange.setAttribute('data-update', bank.clients[i]['id']);
+              buttonChange.setAttribute('data-function', 'changeUser');
               buttonDelete = clientCard.appendChild(document.createElement('div'));
               buttonDelete.innerText = 'Delete';
               buttonDelete.className = 'buttonDelete';
+              buttonDelete.setAttribute('data-function', 'deleteUser');
               buttonDelete.setAttribute('data-update', bank.clients[i]['id']);
+
               clientCard.addEventListener('click', (event) => {
-                if(event.target.getAttribute('data-update')) {
-                    if(event.target.className === 'buttonChange'){
-                        changeUser(event.target);
-                    } else {
-                        deleteUser(event.target);
-                    }
+                let action = event.target.getAttribute("data-function");
+                if(typeof this[action] === "function"){
+                    this[action](event.target);
                 }
               })
           }
