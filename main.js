@@ -237,7 +237,7 @@ class Bank {
               buttonDelete.setAttribute('data-delete', bank.clients[i]['id']);
 
               clientCard.addEventListener('click', (event) => {
-                  if(event.target.getAttribute('data-change')) {
+                if(event.target.getAttribute('data-change')) {
                     changeUser(event.target);
                 }
                 if(event.target.getAttribute('data-delete')) {
