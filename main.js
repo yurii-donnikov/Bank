@@ -239,8 +239,8 @@ class Bank {
               buttonDelete.setAttribute('data-update', bank.clients[i]['id']);
 
               clientCard.addEventListener('click', (event) => {
-                let action = event.target.getAttribute("data-function");
-                if(typeof this[action] === "function"){
+                let action = event.target.getAttribute('data-function');
+                if(typeof this[action] === 'function'){
                     this[action](event.target);
                 }
               })
