@@ -199,9 +199,10 @@ class Bank {
   function createCard(){
       for(let i = 0; i < bank.clients.length; i++){
           if(!document.querySelector('.cardBlock').children[i]){
+            bank.clients[i]['id'] = i;
               clientCard = document.querySelector('.cardBlock').appendChild(document.createElement('div'));
               clientCard.className = 'clientCard';
-              clientCard.setAttribute('data-id', i);
+              clientCard.setAttribute('data-id', bank.clients[i]['id']);
                   for(let property in bank.clients[i]){
                       if(property === 'checks'){
                           createCheck(bank.clients[i][property]);
@@ -229,35 +230,48 @@ class Bank {
               buttonChange = clientCard.appendChild(document.createElement('div'));
               buttonChange.innerText = 'Change';
               buttonChange.className = 'buttonChange';
+              buttonChange.setAttribute('data-change', bank.clients[i]['id']);
               buttonDelete = clientCard.appendChild(document.createElement('div'));
               buttonDelete.innerText = 'Delete';
               buttonDelete.className = 'buttonDelete';
+              buttonDelete.setAttribute('data-delete', bank.clients[i]['id']);
+
               clientCard.addEventListener('click', (event) => {
-                  if(event.target.className === 'buttonChange'){
-                    indexActiveCard = event.target.parentNode.getAttribute('data-id');
-                    document.querySelector('.popupWindow').style = 'display: block';
-                  }
-                  if(event.target.className === 'buttonDelete'){
-                    event.target.parentNode.remove();
-                    bank.clients.splice(event.target.parentNode.getAttribute('data-id'), 1);
-                    overwriteAttribute();
+                  if(event.target.getAttribute('data-change')) {
+                    changeUser(event.target);
+                }
+                if(event.target.getAttribute('data-delete')) {
+                   deleteUser(event.target);
                 }
               })
           }
       }
   }
-  createCard()
+createCard()
+
+function changeUser (item){
+    for(let i = 0; i < bank.clients.length; i++){
+        if(bank.clients[i]['id'] === Number(item.getAttribute('data-change'))){
+            indexActiveCard = bank.clients.indexOf(bank.clients[i]);
+            document.querySelector('.popupWindow').style = 'display: block';
+        }
+    }
+}
+
+function deleteUser (item){
+    for(let i = 0; i < bank.clients.length; i++){
+        if(bank.clients[i]['id'] === Number(item.getAttribute('data-delete'))){
+        let indexElement = bank.clients.indexOf(bank.clients[i]);
+        item.parentNode.remove();
+        bank.clients.splice(indexElement, 1);
+        }
+    }
+}
+
+let newClient = {checks: [],};
+let indexObject = 0;
   
-  function overwriteAttribute () {
-      for(let i = 0; i < document.querySelector('.cardBlock').children.length; i++){
-          document.querySelector('.cardBlock').children[i].setAttribute('data-id', i);
-      }
-  }
-  
-  let newClient = {checks: [],};
-  let indexObject = 0;
-  
-  function changeCard() {
+function changeCard() {
       let childrenPopup = document.querySelector('.modalWindow').children;
           for(let i = 0; i < childrenPopup.length; i++) {
               if(childrenPopup[i].className === 'Debet' || childrenPopup[i].className === 'Credit'){
@@ -288,7 +302,7 @@ class Bank {
                               newClient[name] = childrenPopup[i].value;
                               newClient['registration'] = new Date();
                           } else{
-                              bank.clients[indexActiveCard][name] = childrenPopup[i].value;
+                              bank.clients[indexActiveCard]['name'] = childrenPopup[i].value;
                               document.getElementsByClassName(childrenPopup[i].getAttribute('data-id'))[indexActiveCard].innerText = childrenPopup[i].value;
                           }
                           childrenPopup[i].value = '';
@@ -357,5 +371,4 @@ class Bank {
           createCard();
       }
       document.querySelector('.popupWindow').style = 'display: none';
-  }
-  
+}
